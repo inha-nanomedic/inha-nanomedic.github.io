@@ -118,10 +118,10 @@ nav.scrolled {
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 55% 45% at 60% 40%, rgba(46,196,182,0.06) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 50% at 30% 60%, rgba(74,144,196,0.05) 0%, transparent 55%);
-  animation: nebulaShift 35s ease-in-out infinite alternate;
-  will-change: opacity;
+    radial-gradient(ellipse 65% 55% at 60% 40%, rgba(46,196,182,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 55% at 30% 60%, rgba(74,144,196,0.15) 0%, transparent 50%);
+  animation: nebulaShift 25s ease-in-out infinite alternate;
+  will-change: opacity, transform;
 }
 .page-hero-dots {
   position: absolute; inset: 0; z-index: 1;
@@ -176,15 +176,17 @@ nav.scrolled {
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 65% 35%, rgba(46,196,182,0.07) 0%, transparent 70%),
-    radial-gradient(ellipse 45% 55% at 25% 65%, rgba(74,144,196,0.06) 0%, transparent 60%);
-  animation: nebulaShift 35s ease-in-out infinite alternate;
-  will-change: opacity;
+    radial-gradient(ellipse 70% 60% at 65% 35%, rgba(46,196,182,0.22) 0%, transparent 65%),
+    radial-gradient(ellipse 55% 65% at 25% 65%, rgba(74,144,196,0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(26,58,107,0.25) 0%, transparent 50%);
+  animation: nebulaShift 25s ease-in-out infinite alternate;
+  will-change: opacity, transform;
 }
 @keyframes nebulaShift {
-  0% { opacity: 0.4; filter: hue-rotate(0deg); }
-  50% { opacity: 1; filter: hue-rotate(15deg); }
-  100% { opacity: 0.6; filter: hue-rotate(-10deg); }
+  0% { opacity: 0.6; transform: scale(1) translate(0, 0); filter: hue-rotate(0deg); }
+  33% { opacity: 1; transform: scale(1.08) translate(2%, -1%); filter: hue-rotate(20deg); }
+  66% { opacity: 0.8; transform: scale(0.95) translate(-2%, 1%); filter: hue-rotate(-15deg); }
+  100% { opacity: 1; transform: scale(1.05) translate(1%, 2%); filter: hue-rotate(10deg); }
 }
 .hero-dots {
   position: absolute; inset: 0; z-index: 1;
