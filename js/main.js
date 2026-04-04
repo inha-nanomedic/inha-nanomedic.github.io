@@ -52,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fallback: show everything
     fadeEls.forEach(el => el.classList.add('visible'));
   }
+  // Safety net: force all fade-in visible after 2.5s (fixes Safari/Mac blank page)
+  setTimeout(() => {
+    document.querySelectorAll('.fade-in:not(.visible)').forEach(el => el.classList.add('visible'));
+  }, 2500);
 
   // ── Publication / Patent tabs ──
   const tabs = document.querySelectorAll('.pub-tab');

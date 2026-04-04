@@ -114,6 +114,15 @@ nav.scrolled {
     radial-gradient(ellipse 50% 50% at 20% 70%, rgba(46,196,182,0.06) 0%, transparent 60%),
     linear-gradient(160deg, #0a1628 0%, #0d1f3c 60%, #071220 100%);
 }
+.page-hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 45% at 60% 40%, rgba(46,196,182,0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 30% 60%, rgba(74,144,196,0.05) 0%, transparent 55%);
+  animation: nebulaShift 35s ease-in-out infinite alternate;
+  will-change: opacity;
+}
 .page-hero-dots {
   position: absolute; inset: 0; z-index: 1;
   background-image:
@@ -161,6 +170,21 @@ nav.scrolled {
     radial-gradient(ellipse 80% 60% at 70% 40%, rgba(26,58,107,0.55) 0%, transparent 70%),
     radial-gradient(ellipse 50% 50% at 20% 70%, rgba(46,196,182,0.08) 0%, transparent 60%),
     linear-gradient(160deg, #0a1628 0%, #0d1f3c 60%, #071220 100%);
+}
+/* Nebula glow — slow teal/blue color wash */
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 65% 35%, rgba(46,196,182,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 55% at 25% 65%, rgba(74,144,196,0.06) 0%, transparent 60%);
+  animation: nebulaShift 35s ease-in-out infinite alternate;
+  will-change: opacity;
+}
+@keyframes nebulaShift {
+  0% { opacity: 0.4; filter: hue-rotate(0deg); }
+  50% { opacity: 1; filter: hue-rotate(15deg); }
+  100% { opacity: 0.6; filter: hue-rotate(-10deg); }
 }
 .hero-dots {
   position: absolute; inset: 0; z-index: 1;
@@ -679,6 +703,19 @@ footer {
 }
 .fade-in.visible {
   opacity: 1; transform: translateY(0);
+}
+/* Safari/Mac fallback: if JS doesn't trigger, show content after 3s */
+@supports (-webkit-touch-callout: none) {
+  .fade-in { animation: safariFallback 0.6s ease 3s forwards; }
+}
+@keyframes safariFallback { to { opacity: 1; transform: translateY(0); } }
+/* Also ensure page-hero content is ALWAYS visible (critical above-fold) */
+.page-hero-content.fade-in,
+.hero-content .fade-in,
+.hero .fade-in { animation: fadeUpImmediate 0.7s ease forwards; }
+@keyframes fadeUpImmediate {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 .fade-in:nth-child(2) { transition-delay: 0.1s; }
 .fade-in:nth-child(3) { transition-delay: 0.2s; }
