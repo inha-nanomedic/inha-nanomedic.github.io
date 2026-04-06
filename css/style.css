@@ -706,12 +706,7 @@ footer {
 .fade-in.visible {
   opacity: 1; transform: translateY(0);
 }
-/* Safari/Mac fallback: if JS doesn't trigger, show content after 3s */
-@supports (-webkit-touch-callout: none) {
-  .fade-in { animation: safariFallback 0.6s ease 3s forwards; }
-}
-@keyframes safariFallback { to { opacity: 1; transform: translateY(0); } }
-/* Also ensure page-hero content is ALWAYS visible (critical above-fold) */
+/* Hero content always visible (critical above-fold, no JS dependency) */
 .page-hero-content.fade-in,
 .hero-content .fade-in,
 .hero .fade-in { animation: fadeUpImmediate 0.7s ease forwards; }
@@ -754,7 +749,9 @@ footer {
 /* ── ACCESSIBILITY ── */
 @media (prefers-reduced-motion: reduce) {
   .hero-dots, .page-hero-dots { animation: none; }
+  .hero-bg::after, .page-hero-bg::after { animation: none; }
   .fade-in { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
 }
 
 /* ══════════════════════════════════════════════════
