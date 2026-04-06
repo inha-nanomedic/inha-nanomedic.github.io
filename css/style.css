@@ -229,7 +229,7 @@ nav.scrolled {
 
 /* ── STATS BAR ── */
 .stats-bar {
-  display: grid; grid-template-columns: repeat(4, 1fr);
+  display: grid; grid-template-columns: repeat(3, 1fr);
   background: var(--deep); border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
