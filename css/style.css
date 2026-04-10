@@ -624,18 +624,6 @@ section { padding: 120px 56px; }
   color: var(--teal);
 }
 
-/* One-line italic serif lede under the title */
-.fac-category-lede {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-style: italic;
-  line-height: 1.5;
-  color: rgba(255,255,255,0.62);
-  margin: 14px 0 0;
-  font-weight: 300;
-  max-width: 72ch;
-}
-
 /* Grid of equipment items */
 .fac-grid {
   display: grid;
@@ -747,14 +735,12 @@ section { padding: 120px 56px; }
   .fac-category-title { padding-top: 14px; }
   .fac-cat-mono { font-size: 0.68rem; }
   .fac-category-title h2 { font-size: 1.6rem; }
-  .fac-category-lede { font-size: 0.98rem; margin-top: 10px; }
   .fac-name { font-size: 1.25rem; }
   .fac-item figcaption { padding: 20px 20px 24px; }
 }
 @media (max-width: 480px) {
   .facilities-catalog { padding: 48px 16px; }
   .fac-category-label { font-size: 2.8rem; min-width: 44px; }
-  .fac-category-lede { font-size: 0.92rem; }
 }
 
 /* ── BENEFIT CARDS ── */
