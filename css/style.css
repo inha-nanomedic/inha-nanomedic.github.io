@@ -561,207 +561,278 @@ section { padding: 120px 56px; }
 }
 
 /* ══════════════════════════════════════════════════
-   FACILITIES CATALOG — industrial/editorial layout
+   FACILITIES — "Scientific Exhibition Chapters"
+   Editorial layout: giant outlined roman numerals,
+   spotlight piece per chapter, supporting grid,
+   stripped to equipment name + description only.
    ══════════════════════════════════════════════════ */
-.facilities-catalog {
+.fac-exhibition {
   background: var(--deep);
-  padding: 120px 56px;
-  max-width: 100%;
-}
-
-/* Category heading */
-.fac-category {
-  display: flex;
-  align-items: flex-start;
-  gap: 36px;
-  margin: 80px auto 40px;
-  max-width: 1280px;
+  padding: 140px 56px 100px;
   position: relative;
+  overflow: hidden;
 }
-.fac-category:first-of-type { margin-top: 0; }
+.fac-exhibition::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 15% 8%, rgba(46,196,182,0.07), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 85% 85%, rgba(46,196,182,0.05), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.fac-exhibition > * { position: relative; z-index: 1; }
 
-.fac-category-label {
+/* Each chapter is an article */
+.fac-chapter {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding-bottom: 160px;
+}
+.fac-chapter:last-child { padding-bottom: 20px; }
+.fac-chapter + .fac-chapter {
+  border-top: 1px solid rgba(46,196,182,0.12);
+  padding-top: 140px;
+}
+
+/* Chapter head — numeral + meta column */
+.fac-chapter-head {
+  display: grid;
+  grid-template-columns: minmax(200px, 0.9fr) 2fr;
+  gap: 72px;
+  align-items: start;
+  margin-bottom: 90px;
+}
+
+.fac-numeral {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 6rem;
+  font-size: clamp(8.5rem, 15vw, 15rem);
   font-weight: 300;
-  line-height: 0.9;
-  color: rgba(46,196,182,0.18);
-  letter-spacing: -0.02em;
-  flex: 0 0 auto;
-  min-width: 100px;
-  text-align: center;
-}
-
-.fac-category-title {
-  flex: 1;
-  padding-top: 20px;
-  border-top: 1px solid rgba(74,144,196,0.25);
-  padding-left: 0;
-}
-.fac-cat-mono {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 8px;
-}
-.fac-category-title h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-  font-weight: 400;
-  line-height: 1.1;
-  color: var(--white);
+  font-style: italic;
+  line-height: 0.82;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(46,196,182,0.55);
+  letter-spacing: -0.04em;
+  user-select: none;
   margin: 0;
 }
-.fac-category-title h2 em {
+
+.fac-meta {
+  padding-top: 32px;
+  max-width: 640px;
+}
+.fac-meta h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.02;
+  color: var(--white);
+  margin: 0 0 28px;
+  letter-spacing: -0.015em;
+}
+.fac-meta h2 em {
   font-style: italic;
   color: var(--teal);
+  font-weight: 300;
 }
-
-/* Grid of equipment items */
-.fac-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  max-width: 1280px;
-  margin: 0 auto 40px;
-  background: rgba(74,144,196,0.15);
-  border: 1px solid rgba(74,144,196,0.15);
-}
-
-/* Individual equipment card */
-.fac-item {
-  background: var(--navy);
+.fac-lede {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: rgba(255,255,255,0.68);
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.3s;
-}
-.fac-item:hover {
-  background: #0c1a30;
+  font-weight: 300;
+  max-width: 58ch;
 }
 
-/* Photo frame */
-.fac-photo {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  background: #000;
+/* ───── SPOTLIGHT PIECE ───── */
+.fac-spotlight {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 0;
+  margin: 0 0 100px;
+  background: var(--navy);
+  border: 1px solid rgba(46,196,182,0.18);
   overflow: hidden;
-  border-bottom: 1px solid rgba(74,144,196,0.15);
 }
-.fac-photo img {
+
+.fac-spotlight-photo {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+  background: #000;
+}
+.fac-spotlight-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: saturate(0.92) brightness(0.92);
-  transition: transform 0.6s ease, filter 0.4s ease;
+  filter: saturate(0.88) brightness(0.92) contrast(1.05);
+  transition: filter 0.6s ease, transform 1.2s ease;
 }
-.fac-item:hover .fac-photo img {
-  transform: scale(1.04);
+.fac-spotlight:hover .fac-spotlight-photo img {
   filter: saturate(1.05) brightness(1);
+  transform: scale(1.02);
 }
 
-/* Specimen tag on photo */
-.fac-tag {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  font-family: 'DM Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.12em;
-  padding: 4px 10px;
-  background: rgba(10,22,40,0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: var(--teal);
-  border: 1px solid rgba(46,196,182,0.3);
-  text-transform: uppercase;
-  z-index: 2;
-}
-
-/* Caption */
-.fac-item figcaption {
-  padding: 24px 24px 28px;
+.fac-spotlight-caption {
+  padding: 64px 56px 56px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  flex: 1;
+  justify-content: center;
+  position: relative;
 }
-.fac-brand {
-  font-family: 'DM Mono', monospace;
-  font-size: 0.66rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  opacity: 0.85;
+.fac-spotlight-caption::before {
+  content: '';
+  position: absolute;
+  top: 64px;
+  left: 56px;
+  width: 48px;
+  height: 1px;
+  background: var(--teal);
 }
-.fac-name {
+.fac-spotlight-caption h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  color: var(--white);
+  margin: 28px 0 22px;
+  letter-spacing: -0.005em;
+}
+.fac-spotlight-caption p {
+  font-size: 0.95rem;
+  line-height: 1.72;
+  color: rgba(255,255,255,0.7);
+  margin: 0;
+  font-weight: 300;
+  max-width: 44ch;
+}
+
+/* ───── SUPPORTING GRID ───── */
+.fac-grid {
+  display: grid;
+  gap: 56px 36px;
+}
+.fac-grid[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+.fac-grid[data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
+
+/* Individual supporting piece */
+.fac-piece {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s ease;
+}
+.fac-piece:hover { transform: translateY(-4px); }
+
+.fac-piece-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(46,196,182,0.1);
+}
+.fac-piece-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.85) brightness(0.88);
+  transition: filter 0.5s, transform 0.9s;
+}
+.fac-piece:hover .fac-piece-photo img {
+  filter: saturate(1) brightness(1);
+  transform: scale(1.03);
+}
+.fac-piece-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 58%, rgba(10,22,40,0.5) 100%);
+  pointer-events: none;
+}
+
+.fac-piece figcaption {
+  padding: 24px 4px 0;
+}
+.fac-piece h3 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.4rem;
   font-weight: 400;
+  line-height: 1.22;
   color: var(--white);
-  line-height: 1.25;
-  margin: 2px 0 6px;
+  margin: 0 0 10px;
+  letter-spacing: -0.005em;
 }
-.fac-desc {
-  font-size: 0.85rem;
+.fac-piece p {
+  font-size: 0.82rem;
   line-height: 1.65;
-  color: var(--muted);
-  margin-top: auto;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+  font-weight: 300;
 }
 
-/* Subtle teal accent line on hover */
-.fac-item::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--teal), var(--accent));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-  z-index: 3;
+/* ───── DUO LAYOUT (Chapter VII) ───── */
+.fac-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
 }
-.fac-item:hover::after {
-  transform: scaleX(1);
-}
+.fac-duo .fac-piece-photo { aspect-ratio: 3 / 2; }
+.fac-duo .fac-piece h3 { font-size: 1.65rem; }
+.fac-duo .fac-piece p { font-size: 0.9rem; }
 
-/* Responsive — tablet */
+/* ───── RESPONSIVE ───── */
 @media (max-width: 1024px) {
-  .facilities-catalog { padding: 80px 40px; }
-  .fac-grid { grid-template-columns: repeat(2, 1fr); }
-  .fac-category-label { font-size: 5rem; min-width: 80px; }
-  .fac-category { gap: 24px; margin: 64px auto 32px; }
+  .fac-exhibition { padding: 100px 40px 80px; }
+  .fac-chapter { padding-bottom: 120px; }
+  .fac-chapter + .fac-chapter { padding-top: 100px; }
+  .fac-chapter-head {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 64px;
+  }
+  .fac-numeral { font-size: 10rem; }
+  .fac-meta { padding-top: 0; }
+  .fac-spotlight { grid-template-columns: 1fr; margin-bottom: 72px; }
+  .fac-spotlight-caption { padding: 48px 40px; }
+  .fac-spotlight-caption::before { left: 40px; top: 48px; }
+  .fac-grid { gap: 44px 28px; }
+  .fac-grid[data-cols="3"] { grid-template-columns: repeat(2, 1fr); }
 }
 
-/* Responsive — mobile */
 @media (max-width: 768px) {
-  .facilities-catalog { padding: 60px 20px; }
-  .fac-grid { grid-template-columns: 1fr; }
-  .fac-category {
-    gap: 16px;
-    margin: 48px auto 24px;
-    flex-direction: row;
-    align-items: flex-start;
-  }
-  .fac-category-label {
-    font-size: 3.6rem;
-    min-width: 60px;
-  }
-  .fac-category-title { padding-top: 14px; }
-  .fac-cat-mono { font-size: 0.68rem; }
-  .fac-category-title h2 { font-size: 1.6rem; }
-  .fac-name { font-size: 1.25rem; }
-  .fac-item figcaption { padding: 20px 20px 24px; }
+  .fac-exhibition { padding: 70px 20px 60px; }
+  .fac-chapter { padding-bottom: 80px; }
+  .fac-chapter + .fac-chapter { padding-top: 70px; }
+  .fac-chapter-head { margin-bottom: 48px; }
+  .fac-numeral { font-size: 6.5rem; }
+  .fac-meta h2 { font-size: 2.1rem; margin-bottom: 20px; }
+  .fac-lede { font-size: 1.08rem; }
+  .fac-spotlight { margin-bottom: 56px; }
+  .fac-spotlight-caption { padding: 36px 28px; }
+  .fac-spotlight-caption::before { top: 36px; left: 28px; }
+  .fac-spotlight-caption h3 { font-size: 1.7rem; margin-top: 24px; }
+  .fac-grid { gap: 40px 20px; }
+  .fac-grid[data-cols="3"],
+  .fac-grid[data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
+  .fac-piece h3 { font-size: 1.25rem; }
+  .fac-duo { grid-template-columns: 1fr; gap: 36px; }
+  .fac-duo .fac-piece h3 { font-size: 1.4rem; }
 }
+
 @media (max-width: 480px) {
-  .facilities-catalog { padding: 48px 16px; }
-  .fac-category-label { font-size: 2.8rem; min-width: 44px; }
+  .fac-exhibition { padding: 56px 16px 48px; }
+  .fac-numeral { font-size: 5rem; }
+  .fac-meta h2 { font-size: 1.75rem; }
+  .fac-lede { font-size: 1rem; }
+  .fac-spotlight-caption { padding: 28px 22px; }
+  .fac-spotlight-caption h3 { font-size: 1.5rem; }
+  .fac-grid[data-cols="3"],
+  .fac-grid[data-cols="2"] { grid-template-columns: 1fr; }
+  .fac-piece figcaption { padding-top: 20px; }
 }
 
 /* ── BENEFIT CARDS ── */
