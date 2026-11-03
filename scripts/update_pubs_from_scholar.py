@@ -63,17 +63,19 @@ def resort_tbody(html_content, new_row_strings):
     """Rebuild the <tbody> with existing + new rows, sorted year-descending.
 
     Existing rows are re-emitted from their preserved raw HTML (unchanged).
-    Sort is stable: within the same year, existing rows keep their prior order
-    and new rows follow them. Only ordering changes — no row is edited/dropped.
+    Sort is stable: within the same year, new rows come FIRST (newest paper at
+    the top), then existing rows in their prior order. Only ordering changes —
+    no row is edited/dropped.
     """
     existing = parse_existing_rows(html_content)
-    combined = [{"year": r["year"], "raw": r["raw"]} for r in existing]
+    new_items = []
     for s in new_row_strings:
         mt = ROW_RE.search(s)
         if mt is None:
             raise ValueError(f"new row string does not match expected <tr> format: {s!r}")
         yr = _year_to_int(mt.group(3))
-        combined.append({"year": yr, "raw": s.strip()})
+        new_items.append({"year": yr, "raw": s.strip()})
+    combined = new_items + [{"year": r["year"], "raw": r["raw"]} for r in existing]
 
     combined.sort(key=lambda r: -r["year"])  # stable; preserves same-year order
 

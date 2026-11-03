@@ -63,6 +63,13 @@ def test_resort_inserts_new_row_in_year_order():
     assert years == [2023, 2021, 2019]   # 2021 lands between, not at the top
     assert any(r["title"] == "Mid Paper" for r in rows)
 
+def test_resort_puts_new_row_first_within_same_year():
+    html = load_fixture()
+    new = ["<tr><td>Brand New 2023 Paper</td><td>ACS Nano</td><td>2023</td><td><a href=\"d\">DOI</a></td></tr>"]
+    rows = m.parse_existing_rows(m.resort_tbody(html, new))
+    assert [r["title"] for r in rows] == [
+        "Brand New 2023 Paper", "Newer Paper About Hydrogels", "Older Paper About Liposomes"]
+
 def test_resort_raises_when_tbody_missing():
     import pytest
     with pytest.raises(ValueError):
